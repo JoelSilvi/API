@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poke Api</title>
+</head>
+
+<body>
+  <div class="container">
+
+  </div>
+
+
+  <script>
+
+    const d = document
+    const container = d.querySelector(".container")
+    const url = `https://pokeapi.co/api/v2/berry/`
+
+    fetch(url)
+      .then(res => res.json())
+      .then(datos => {
+        const pokeInfo = datos.results
+        pokeInfo.forEach(dato => {
+          console.log(dato.name)
+          console.log(dato.url)
+
+          const $name = d.createElement("p")
+          $name.innerHTML = dato.name
+          container.appendChild($name)
+          const $url = d.createElement("p")
+          $url.innerHTML = dato.url
+          container.appendChild($url)
+        });
+        console.log(pokeInfo)
+      })
+
+  </script>
+</body>
+
+</html>
