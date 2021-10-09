@@ -28,14 +28,41 @@
           console.log(dato.name)
           console.log(dato.url)
 
-          const $name = d.createElement("p")
-          $name.innerHTML = dato.name
-          container.appendChild($name)
-          const $url = d.createElement("p")
-          $url.innerHTML = dato.url
-          container.appendChild($url)
+          // const $name = d.createElement("p")
+          // $name.innerHTML = dato.name
+          // container.appendChild($name)
+          // const $url = d.createElement("p")
+          // $url.innerHTML = dato.url
+          // container.appendChild($url)
         });
         console.log(pokeInfo)
+      })
+
+    const urlPoke = "https://pokeapi.co/api/v2/pokemon/"
+    fetch(urlPoke)
+      .then(res => res.json())
+      .then(datos => {
+
+        datos.results.forEach(elemento => {
+          fetch(elemento.url)
+            .then(res => res.json())
+            .then(datos => {
+              console.log(datos)
+              let poke = {
+                id: datos.id,
+                name: datos.name,
+                avatar: datos.sprites.front_default,
+              }
+
+              let $img = d.createElement("img")
+              $img.setAttribute("src", poke.avatar)
+              $img.setAttribute('height', '150px');
+              $img.setAttribute('width', '150px');
+              $img.innerHTML = poke.avatar
+              container.appendChild($img)
+              console.log(poke.avatar)
+            })
+        });
       })
 
   </script>
