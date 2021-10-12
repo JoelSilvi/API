@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cat-facts</title>
+</head>
+
+<body>
+
+  <div class="container"></div>
+
+
+  <script>
+    const d = document
+    const container = d.querySelector(".container")
+    const url = "https://cat-fact.herokuapp.com/facts"
+    fetch(url)
+      .then(res => res.json())
+      .then(datos => {
+        // console.log(datos)
+        // console.log(Object.values(el))
+        for (el of datos) {
+          const status = {
+            verified: el.status.verified,
+            sentCount: el.status.sentCount
+          }
+
+          const extra = {
+            createdAt: el.createdAt,
+            deleted: el.deleted,
+            source: el.source,
+            text: el.text,
+            type: el.type,
+            updatedAt: el.updatedAt,
+            used: el.used,
+            user: el.user,
+            __v: el.__v,
+            _id: el._id
+
+          }
+          console.log(`verificando  ${status.verified}`)
+          console.log(`envío contador  ${status.sentCount}`)
+          console.log(`created ${extra.createdAt}`)
+          console.log(`deleted ${extra.deleted}`)
+          console.log(`source ${extra.source}`)
+          console.log(`text ${extra.text}`)
+          console.log(`type ${extra.type}`)
+          console.log(`updated ${extra.updatedAt}`)
+          console.log(`used ${extra.used}`)
+          console.log(`user ${extra.user}`)
+          console.log(`__v ${extra.__v}`)
+          console.log(`_id ${extra._id}`)
+          console.log("**************************")
+
+          const statusFor = Object.values(status)
+          const statusExtra = Object.values(extra)
+
+
+          statusFor.forEach(element => {
+            // console.log(element)
+            const $status = d.createElement("p")
+            $status.innerHTML = element
+            container.appendChild($status)
+          });
+
+          statusExtra.forEach(element => {
+            // console.log(element)
+            const $extra = d.createElement("p")
+            $extra.innerHTML = element
+            container.appendChild($extra)
+          });
+
+
+        }
+
+
+
+      })
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>
